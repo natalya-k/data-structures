@@ -81,9 +81,18 @@ namespace DataStructures
 
         public IEnumerator<T> GetEnumerator()
         {
-            for (int i = first; i < Count; i++)
+            int k = first;
+
+            for (int i = 0; i < Count; i++)
             {
-                yield return items[i];
+                yield return items[k];
+
+                k++;
+
+                if (k == items.Length)
+                {
+                    k = 0;
+                }
             }
         }
 
