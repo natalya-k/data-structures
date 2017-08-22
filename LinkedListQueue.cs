@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -46,43 +46,41 @@ namespace DataStructures
 
         public T Dequeue()
         {
-            if (!IsEmpty)
+            if (IsEmpty)
             {
-                Node result = first;
-
-                first = first.Next;
-
-                if (IsEmpty)
-                {
-                    last = null;
-                }
-
-                return result.Data;
+                throw new InvalidOperationException("Queue underflow.");
             }
-            else
+            
+            Node result = first;
+
+            first = first.Next;
+
+            if (IsEmpty)
             {
-                throw new Exception("Queue underflow.");
+                last = null;
             }
+
+            return result.Data;
         }
 
         public T Peek()
         {
-            if (!IsEmpty)
+            if (IsEmpty)
             {
-                return first.Data;
+                throw new InvalidOperationException("The queue is empty.");
             }
-            else
-            {
-                throw new Exception("The queue is empty.");
-            }
+
+            return first.Data;
         }
 
         public void Print()
         {
             foreach (T item in this)
             {
-                Console.WriteLine(item.ToString());
+                Console.Write("{0} ", item.ToString());
             }
+
+            Console.WriteLine();
         }
 
         public IEnumerator<T> GetEnumerator()
