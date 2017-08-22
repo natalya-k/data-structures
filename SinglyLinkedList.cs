@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -28,19 +28,17 @@ namespace DataStructures
             }
         }
 
-        public void AddFirst(Node node)
-        {
-            node.Next = head;
-            head = node;
-        }
-
         public void AddFirst(T data)
         {
-            AddFirst(new Node(data));
+            Node node = new Node(data);
+            node.Next = head;
+            head = node;
         }        
 
-        public void AddLast(Node node)
+        public void AddLast(T data)
         {
+            Node node = new Node(data);
+
             if (head == null)
             {
                 head = node;
@@ -55,23 +53,7 @@ namespace DataStructures
                 }
 
                 current.Next = node;
-            }                        
-        }
-
-        public void AddLast(T data)
-        {
-            AddLast(new Node(data));
-        }
-
-        public void AddAfter(Node previous, Node node)
-        {
-            node.Next = previous.Next;
-            previous.Next = node;
-        }
-
-        public void AddAfter(Node previous, T data)
-        {
-            AddAfter(previous, new Node(data));
+            }
         }
 
         public void Remove(T data)
@@ -80,13 +62,13 @@ namespace DataStructures
             {
                 return;
             }
-            
+
             if (head.Data.Equals(data))
             {
                 head = head.Next;
                 return;
             }
-            
+
             Node current = head;
 
             while (current.Next != null)
@@ -96,10 +78,10 @@ namespace DataStructures
                     current.Next = current.Next.Next;
                     break;
                 }
-                
-                current = current.Next;                
-            }                        
-        }       
+
+                current = current.Next;
+            }
+        }
 
         public void Reverse()
         {
@@ -122,8 +104,10 @@ namespace DataStructures
         {
             foreach (T item in this)
             {
-                Console.WriteLine(item.ToString());
+                Console.Write("{0} ", item.ToString());
             }
+
+            Console.WriteLine();
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -142,7 +126,7 @@ namespace DataStructures
             return GetEnumerator();
         }
 
-        public class Node
+        private class Node
         {
             public T Data { get; private set; }
             public Node Next { get; set; }
