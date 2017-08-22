@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace DataStructures
 {
@@ -99,8 +99,8 @@ namespace DataStructures
         {
             try
             {
-                //ArrayQueue<int> queue = new ArrayQueue<int>(4);
-                LinkedListQueue<int> queue = new LinkedListQueue<int>();
+                ArrayQueue<int> queue = new ArrayQueue<int>(4);
+                //LinkedListQueue<int> queue = new LinkedListQueue<int>();
 
                 try
                 {
@@ -128,8 +128,8 @@ namespace DataStructures
                 }
 
                 queue.Print();
-
                 Console.WriteLine();
+
                 Console.WriteLine("Count = {0}", queue.Count);
 
                 int peek = queue.Peek();
@@ -139,11 +139,17 @@ namespace DataStructures
 
                 int popped = queue.Dequeue();
                 Console.WriteLine("The removed value is {0}.", popped);
+                Console.WriteLine();
 
+                //in the array implementation the value will be added at the beginning of an array
+                queue.Enqueue(5);
+                
+                queue.Print();
                 Console.WriteLine();
 
                 try
                 {
+                    queue.Dequeue();
                     queue.Dequeue();
                     queue.Dequeue();
                     queue.Dequeue();
