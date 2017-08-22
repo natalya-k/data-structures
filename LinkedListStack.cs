@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -36,36 +36,34 @@ namespace DataStructures
 
         public T Pop()
         {
-            if (top != null)
+            if (IsEmpty)
             {
-                Node result = top;
-                top = top.Next;
-                return result.Data;
+                throw new InvalidOperationException("The stack is empty.");
             }
-            else
-            {
-                throw new Exception("The stack is empty.");
-            }
+
+            Node result = top;
+            top = top.Next;
+            return result.Data;
         }
 
         public T Peek()
         {
-            if (top != null)
+            if (IsEmpty)
             {
-                return top.Data;
+                throw new InvalidOperationException("The stack is empty.");
             }
-            else
-            {
-                throw new Exception("The stack is empty.");
-            }
+
+            return top.Data;
         }
 
         public void Print()
         {
             foreach (T item in this)
             {
-                Console.WriteLine(item.ToString());
+                Console.Write("{0} ", item.ToString());
             }
+
+            Console.WriteLine();
         }
 
         public IEnumerator<T> GetEnumerator()
