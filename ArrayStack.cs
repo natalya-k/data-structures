@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -21,48 +21,44 @@ namespace DataStructures
 
         public void Push(T data)
         {
-            if (!IsFull)
+            if (IsFull)
             {
-                items[Count++] = data;
+                throw new InvalidOperationException("Stack overflow.");
             }
-            else
-            {
-                throw new Exception("Stack overflow.");
-            }
+
+            items[Count++] = data;
         }
 
         public T Pop()
         {
-            if (!IsEmpty)
+            if (IsEmpty)
             {
-                T result = items[--Count];
-                items[Count] = default(T);
-                return result;
+                throw new InvalidOperationException("Stack underflow.");
             }
-            else
-            {
-                throw new Exception("Stack underflow.");
-            }
+
+            T result = items[--Count];
+            items[Count] = default(T);
+            return result;
         }
 
         public T Peek()
         {
-            if (!IsEmpty)
+            if (IsEmpty)
             {
-                return items[Count - 1];
+                throw new InvalidOperationException("The stack is empty.");
             }
-            else
-            {
-                throw new Exception("The stack is empty.");
-            }
+
+            return items[Count - 1];
         }
 
         public void Print()
         {
             foreach (T item in this)
             {
-                Console.WriteLine(item.ToString());
+                Console.Write("{0} ", item.ToString());
             }
+
+            Console.WriteLine();
         }
 
         public IEnumerator<T> GetEnumerator()
