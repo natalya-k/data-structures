@@ -1,2 +1,2 @@
 # data-structures
-Data structures implementations.
+Data structures implementations on C#.
