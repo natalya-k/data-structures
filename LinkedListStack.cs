@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -28,10 +28,9 @@ namespace DataStructures
             }
         }
 
-        public void Push(T data)
+        public void Push(T key)
         {
-            Node node = new Node(data, top);
-            top = node;
+            top = new Node(key, top);
         }
 
         public T Pop()
@@ -41,9 +40,9 @@ namespace DataStructures
                 throw new InvalidOperationException("The stack is empty.");
             }
 
-            Node result = top;
+            T result = top.Key;
             top = top.Next;
-            return result.Data;
+            return result;
         }
 
         public T Peek()
@@ -53,7 +52,7 @@ namespace DataStructures
                 throw new InvalidOperationException("The stack is empty.");
             }
 
-            return top.Data;
+            return top.Key;
         }
 
         public void Print()
@@ -72,7 +71,7 @@ namespace DataStructures
 
             while (current != null)
             {
-                yield return current.Data;
+                yield return current.Key;
                 current = current.Next;
             }
         }
@@ -84,14 +83,14 @@ namespace DataStructures
 
         private class Node
         {
-            public T Data { get; set; }
+            public T Key { get; set; }
             public Node Next { get; set; }
 
-            public Node(T data) : this (data, null) { }
+            public Node(T key) : this (key, null) { }
 
-            public Node(T data, Node next)
+            public Node(T key, Node next)
             {
-                Data = data;
+                Key = key;
                 Next = next;
             }
         }

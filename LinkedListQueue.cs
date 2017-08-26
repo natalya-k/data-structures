@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -28,19 +28,19 @@ namespace DataStructures
             }
         }
 
-        public void Enqueue(T data)
+        public void Enqueue(T key)
         {
-            Node lastPrev = last;
-
-            last = new Node(data);
+            Node node = new Node(key);
 
             if (IsEmpty)
             {
-                first = last;
+                first = node;
+                last = first;
             }
             else
             {
-                lastPrev.Next = last;
+                last.Next = node;
+                last = last.Next;
             }
         }
 
@@ -60,7 +60,7 @@ namespace DataStructures
                 last = null;
             }
 
-            return result.Data;
+            return result.Key;
         }
 
         public T Peek()
@@ -70,7 +70,7 @@ namespace DataStructures
                 throw new InvalidOperationException("The queue is empty.");
             }
 
-            return first.Data;
+            return first.Key;
         }
 
         public void Print()
@@ -89,7 +89,7 @@ namespace DataStructures
 
             while (current != null)
             {
-                yield return current.Data;
+                yield return current.Key;
                 current = current.Next;
             }
         }
@@ -101,14 +101,14 @@ namespace DataStructures
 
         private class Node
         {
-            public T Data { get; set; }
+            public T Key { get; set; }
             public Node Next { get; set; }
 
-            public Node(T data) : this(data, null) { }
+            public Node(T key) : this(key, null) { }
 
-            public Node(T data, Node next)
+            public Node(T key, Node next)
             {
-                Data = data;
+                Key = key;
                 Next = next;
             }
         }

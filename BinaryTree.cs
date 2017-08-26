@@ -11,9 +11,9 @@ namespace DataStructures
 
         public BinaryTree() { }
 
-        public BinaryTree(T rootData)
+        public BinaryTree(T rootKey)
         {
-            Root = new Node(rootData);
+            Root = new Node(rootKey);
         }
 
         public static BinaryTree<int> SampleTree()
@@ -121,32 +121,32 @@ namespace DataStructures
         {
             public Node Left { get; set; }
             public Node Right { get; set; }
-            public T Data { get; set; }
+            public T Key { get; set; }
 
             public Node() : this(default(T), null, null) { }
 
-            public Node(T data) : this(data, null, null) { }
+            public Node(T key) : this(key, null, null) { }
 
-            public Node(T data, Node left, Node right)
+            public Node(T key, Node left, Node right)
             {
-                Data = data;
+                Key = key;
                 Left = left;
                 Right = right;
             }
 
-            public void AddLeft(T data)
+            public void AddLeft(T key)
             {
-                Left = new Node(data);
+                Left = new Node(key);
             }
 
-            public void AddRight(T data)
+            public void AddRight(T key)
             {
-                Right = new Node(data);
+                Right = new Node(key);
             }
 
             public override string ToString()
             {
-                return Data.ToString();
+                return Key.ToString();
             }
         }
     }

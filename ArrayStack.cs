@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -19,14 +19,14 @@ namespace DataStructures
             items = new T[capacity];
         }
 
-        public void Push(T data)
+        public void Push(T key)
         {
             if (IsFull)
             {
                 throw new InvalidOperationException("Stack overflow.");
             }
 
-            items[Count++] = data;
+            items[Count++] = key;
         }
 
         public T Pop()

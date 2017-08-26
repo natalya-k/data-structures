@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -28,18 +28,16 @@ namespace DataStructures
             }
         }
 
-        public void AddFirst(T data)
+        public void AddFirst(T key)
         {
-            Node node = new Node(data);
-            node.Next = head;
-            head = node;
+            head = new Node(key, head);
         }        
 
-        public void AddLast(T data)
+        public void AddLast(T key)
         {
-            Node node = new Node(data);
+            Node node = new Node(key);
 
-            if (head == null)
+            if (IsEmpty)
             {
                 head = node;
             }
@@ -56,14 +54,14 @@ namespace DataStructures
             }
         }
 
-        public void Remove(T data)
+        public void Remove(T key)
         {
-            if (head == null)
+            if (IsEmpty)
             {
                 return;
             }
 
-            if (head.Data.Equals(data))
+            if (head.Key.Equals(key))
             {
                 head = head.Next;
                 return;
@@ -73,7 +71,7 @@ namespace DataStructures
 
             while (current.Next != null)
             {
-                if (current.Next.Data.Equals(data))
+                if (current.Next.Key.Equals(key))
                 {
                     current.Next = current.Next.Next;
                     break;
@@ -116,7 +114,7 @@ namespace DataStructures
 
             while (current != null)
             {
-                yield return current.Data;
+                yield return current.Key;
                 current = current.Next;
             }
         }        
@@ -128,14 +126,14 @@ namespace DataStructures
 
         private class Node
         {
-            public T Data { get; private set; }
+            public T Key { get; private set; }
             public Node Next { get; set; }
 
-            public Node(T data) : this(data, null) { }
+            public Node(T key) : this(key, null) { }
 
-            public Node(T data, Node next)
+            public Node(T key, Node next)
             {
-                Data = data;
+                Key = key;
                 Next = next;
             }
         }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -21,14 +21,14 @@ namespace DataStructures
             items = new T[capacity];
         }
 
-        public void Enqueue(T data)
+        public void Enqueue(T key)
         {
             if (IsFull)
             {
                 throw new InvalidOperationException("Queue overflow.");
             }
 
-            items[last++] = data;
+            items[last++] = key;
 
             if (last == items.Length)
             {

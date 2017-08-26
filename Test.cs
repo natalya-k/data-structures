@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace DataStructures
 {
@@ -9,7 +9,6 @@ namespace DataStructures
             SinglyLinkedList<int> list = new SinglyLinkedList<int>();
 
             list.AddLast(2);
-
             list.AddLast(3);
             list.AddLast(4);
 
@@ -21,29 +20,36 @@ namespace DataStructures
             list.AddLast(5);
             list.AddLast(6);
 
+            Console.WriteLine("Current list is");
             list.Print();
+            Console.WriteLine();
 
+            Console.WriteLine("Remove first 7, 5, 100 values.");
+            Console.WriteLine();
             list.Remove(7);
             list.Remove(5);
             list.Remove(100);
 
+            Console.WriteLine("Current list is");
             list.Print();
-
             Console.WriteLine();
+
             Console.WriteLine("Count = {0}", list.Count);
             Console.WriteLine();
 
+            Console.WriteLine("Reversed list is");
             list.Reverse();
             list.Print();
         }
 
         public static void TestStack()
         {
-            ArrayStack<int> stack = new ArrayStack<int>(4);
-            //LinkedListStack<int> stack = new LinkedListStack<int>();
+            //ArrayStack<int> stack = new ArrayStack<int>(4);
+            LinkedListStack<int> stack = new LinkedListStack<int>();
 
             try
             {
+                Console.WriteLine("Try to return the value at the top.");
                 stack.Peek();
             }
             catch (InvalidOperationException e)
@@ -52,6 +58,9 @@ namespace DataStructures
                 Console.WriteLine();
             }
 
+            Console.WriteLine("Add 4 items.");
+            Console.WriteLine();
+
             stack.Push(0);
             stack.Push(1);
             stack.Push(2);
@@ -59,7 +68,10 @@ namespace DataStructures
 
             try
             {
+                Console.WriteLine("Try to add one more item.");
                 stack.Push(4);
+                Console.WriteLine("Success!");
+                Console.WriteLine();
             }
             catch (InvalidOperationException e)
             {
@@ -67,23 +79,20 @@ namespace DataStructures
                 Console.WriteLine();
             }
 
+            Console.WriteLine("Current stack is");
             stack.Print();
-
             Console.WriteLine();
+
             Console.WriteLine("Count = {0}", stack.Count);
-
-            int peek = stack.Peek();
-            Console.WriteLine("The peek is {0}.", peek);
-
-            stack.Pop();
-
-            int popped = stack.Pop();
-            Console.WriteLine("The popped value is {0}.", popped);
-
+            Console.WriteLine("The peek is {0}.", stack.Peek());
+            Console.WriteLine("The 1st popped value is {0}.", stack.Pop());
+            Console.WriteLine("The 2nd popped value is {0}.", stack.Pop());
             Console.WriteLine();
 
             try
             {
+                Console.WriteLine("Try to pop last 4 values.");
+                stack.Pop();
                 stack.Pop();
                 stack.Pop();
                 stack.Pop();
@@ -104,6 +113,7 @@ namespace DataStructures
 
                 try
                 {
+                    Console.WriteLine("Try to return the value at the beggining.");
                     queue.Peek();
                 }
                 catch (InvalidOperationException e)
@@ -112,6 +122,9 @@ namespace DataStructures
                     Console.WriteLine();
                 }
 
+                Console.WriteLine("Add 4 items.");
+                Console.WriteLine();
+
                 queue.Enqueue(0);
                 queue.Enqueue(1);
                 queue.Enqueue(2);
@@ -119,7 +132,10 @@ namespace DataStructures
 
                 try
                 {
+                    Console.WriteLine("Try to add one more item.");
                     queue.Enqueue(4);
+                    Console.WriteLine("Success!");
+                    Console.WriteLine();
                 }
                 catch (InvalidOperationException e)
                 {
@@ -127,28 +143,35 @@ namespace DataStructures
                     Console.WriteLine();
                 }
 
+                Console.WriteLine("Current queue is");
                 queue.Print();
                 Console.WriteLine();
 
                 Console.WriteLine("Count = {0}", queue.Count);
 
-                int peek = queue.Peek();
-                Console.WriteLine("The peek is {0}.", peek);
+                Console.WriteLine("The peek is {0}.", queue.Peek());
 
-                queue.Dequeue();
-
-                int popped = queue.Dequeue();
-                Console.WriteLine("The removed value is {0}.", popped);
+                Console.WriteLine("The 1st removed value is {0}.", queue.Dequeue());
+                Console.WriteLine("The 2nd removed value is {0}.", queue.Dequeue());
                 Console.WriteLine();
 
-                //in the array implementation the value will be added at the beginning of an array
+                Console.WriteLine("Current queue is");
+                queue.Print();
+                Console.WriteLine();
+
+                Console.WriteLine("Add one more item.");
+                Console.WriteLine("In the array implementation the value will be added at the beginning.");
+                Console.WriteLine();
                 queue.Enqueue(5);
-                
+
+                Console.WriteLine("Current queue is");
                 queue.Print();
                 Console.WriteLine();
 
                 try
                 {
+                    Console.WriteLine("Try to return first 5 values.");
+                    queue.Dequeue();
                     queue.Dequeue();
                     queue.Dequeue();
                     queue.Dequeue();
@@ -193,6 +216,7 @@ namespace DataStructures
 
             try
             {
+                Console.WriteLine("Try to return the minimum value.");
                 Console.WriteLine("The minimum value is {0}.", tree.Min);
             }
             catch (InvalidOperationException e)
@@ -211,7 +235,6 @@ namespace DataStructures
 
             Console.WriteLine("LEVEL ORDER TRAVERSAL");
             tree.LevelOrderTraversal();
-            Console.WriteLine();
             Console.WriteLine();
 
             Console.WriteLine("Contains 0? {0}", tree.Contains(0));
@@ -233,7 +256,6 @@ namespace DataStructures
             Console.WriteLine();
             Console.WriteLine("LEVEL ORDER TRAVERSAL");
             tree.LevelOrderTraversal();
-            Console.WriteLine();
             Console.WriteLine();
         }
     }

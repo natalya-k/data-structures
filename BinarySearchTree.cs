@@ -14,7 +14,7 @@ namespace DataStructures
                     throw new InvalidOperationException("The tree is empty.");
                 }
 
-                return MinNode(Root).Data;
+                return MinNode(Root).Key;
             }
         }
 
@@ -27,31 +27,31 @@ namespace DataStructures
                     throw new InvalidOperationException("The tree is empty.");
                 }
 
-                return MaxNode(Root).Data;
+                return MaxNode(Root).Key;
             }
         }
 
-        public void Add(T data)
+        public void Add(T key)
         {
             if (Root == null)
             {
-                Root = new Node(data);                
+                Root = new Node(key);                
             }
             else
             {
-                AddTo(Root, data);
+                AddTo(Root, key);
             }
         }
 
-        public void Remove(T data)
+        public void Remove(T key)
         {
-            Root = RemoveAt(Root, data);
+            Root = RemoveAt(Root, key);
         }        
 
-        public bool Contains(T data)
+        public bool Contains(T key)
         {
-            return Search(data) != null;
-            //return SearchAt(Root, data) != null;
+            return Search(key) != null;
+            //return SearchAt(Root, key) != null;
         }
 
         protected override void PrintNode(Node node)
@@ -81,46 +81,46 @@ namespace DataStructures
             }
         }
 
-        private Node AddTo(Node node, T data)
+        private Node AddTo(Node node, T key)
         {
             if (node == null)
             {
-                return new Node(data);
+                return new Node(key);
             }
 
-            if (data.CompareTo(node.Data) < 0)
+            if (key.CompareTo(node.Key) < 0)
             {
-                node.Left = AddTo(node.Left, data);
+                node.Left = AddTo(node.Left, key);
             }
             else
             {
-                node.Right = AddTo(node.Right, data);
+                node.Right = AddTo(node.Right, key);
             }
 
             return node;
         }
 
-        private Node RemoveAt(Node root, T data)
+        private Node RemoveAt(Node node, T key)
         {
             //базовый случай
-            if (root == null)
+            if (node == null)
             {
-                return root;
+                return node;
             }
 
-            int compared = root.Data.CompareTo(data);
+            int compared = node.Key.CompareTo(key);
 
             if (compared > 0)
             {
                 //если искомый ключ меньше корневого ключа, 
                 //то нужный узел находится в левом поддереве
-                root.Left = RemoveAt(root.Left, data);
+                node.Left = RemoveAt(node.Left, key);
             }
             else if (compared < 0)
             {
                 //если искомый ключ больше корневого ключа, 
                 //то нужный узел находится в правом поддереве
-                root.Right = RemoveAt(root.Right, data);
+                node.Right = RemoveAt(node.Right, key);
             }
             else
             {
@@ -128,39 +128,39 @@ namespace DataStructures
 
                 //узел имеет только одного потомка
 
-                if (root.Left == null)
+                if (node.Left == null)
                 {
-                    return root.Right;
+                    return node.Right;
                 }
-                else if (root.Right == null)
+                else if (node.Right == null)
                 {
-                    return root.Left;
+                    return node.Left;
                 }
 
                 //узел имеет двух потомков
 
                 //в правом поддереве нужно найти узел с наименьшим ключом
 
-                Node minNode = MinNode(root.Right);
+                Node minNode = MinNode(node.Right);
 
                 //найденный узел нужно удалить из прежней позиции
                 //и поставить на место текущего узла
 
-                root.Right = RemoveAt(root.Right, minNode.Data);
+                node.Right = RemoveAt(node.Right, minNode.Key);
 
-                root.Data = minNode.Data;
+                node.Key = minNode.Key;
             }
 
-            return root;
+            return node;
         }
 
-        private Node Search(T data)
+        private Node Search(T key)
         {
             Node current = Root;
 
             while (current != null)
             {
-                int compared = current.Data.CompareTo(data);
+                int compared = current.Key.CompareTo(key);
 
                 if (compared > 0)
                 {
@@ -179,37 +179,37 @@ namespace DataStructures
             return current;
         }
 
-        private Node SearchAt(Node root, T data)
+        private Node SearchAt(Node node, T key)
         {
-            if (root == null)
+            if (node == null)
             {
-                return root;
+                return node;
             }
 
-            int compared = root.Data.CompareTo(data);
+            int compared = node.Key.CompareTo(key);
 
             if (compared == 0)
             {
-                return root;
+                return node;
             }
             else if (compared > 0)
             {
-                return SearchAt(root.Left, data);
+                return SearchAt(node.Left, key);
             }
             else
             {
-                return SearchAt(root.Right, data);
+                return SearchAt(node.Right, key);
             }
         }
 
-        private Node MinNode(Node root)
+        private Node MinNode(Node node)
         {
             if (IsEmpty)
             {
                 throw new Exception("The tree is empty.");
             }
 
-            Node current = root;
+            Node current = node;
 
             while (current.Left != null)
             {
@@ -219,14 +219,14 @@ namespace DataStructures
             return current;
         }
 
-        private Node MaxNode(Node root)
+        private Node MaxNode(Node node)
         {
             if (IsEmpty)
             {
                 throw new Exception("The tree is empty.");
             }
 
-            Node current = root;
+            Node current = node;
 
             while (current.Right != null)
             {
@@ -252,7 +252,7 @@ namespace DataStructures
 
             while (root != null)
             {
-                int compared = node.Data.CompareTo(root.Data);
+                int compared = node.Key.CompareTo(root.Key);
 
                 if (compared > 0)
                 {
@@ -288,7 +288,7 @@ namespace DataStructures
 
             while (root != null)
             {
-                int compared = node.Data.CompareTo(root.Data);
+                int compared = node.Key.CompareTo(root.Key);
 
                 if (compared > 0)
                 {
