@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace DataStructures
 {
-    class BinaryTree<T>        
+    class BinaryTree<T> : IEnumerable<T>
     {
         public bool IsEmpty { get { return (Root == null); } }
 
@@ -34,6 +35,14 @@ namespace DataStructures
         public void InOrderTraversal()
         {
             InOrderTraversal(Root);
+        }        
+
+        public void InOrderStackTraversal()
+        {
+            foreach (T key in this)
+            {
+                Console.Write("{0} ", key.ToString());
+            }
         }
 
         public void PostOrderTraversal()
@@ -46,10 +55,58 @@ namespace DataStructures
             LevelOrderTraversal(Root);
         }
 
+        public IEnumerator<T> GetEnumerator()
+        {
+            //нерекурсивная реализация inorder traversal
+
+            if (IsEmpty)
+            {
+                yield return default(T);
+            }
+
+            Stack<Node> stack = new Stack<Node>();
+
+            Node current = Root;
+
+            bool goLeftNext = true;
+
+            stack.Push(current);
+
+            while (stack.Count > 0)
+            {
+                if (goLeftNext)
+                {
+                    while (current.Left != null)
+                    {
+                        stack.Push(current);
+                        current = current.Left;
+                    }
+                }
+
+                yield return current.Key;
+
+                if (current.Right != null)
+                {
+                    current = current.Right;
+                    goLeftNext = true;
+                }
+                else
+                {
+                    current = stack.Pop();
+                    goLeftNext = false;
+                }
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
         protected virtual void PrintNode(Node node)
         {
             Console.Write("{0} ", node.ToString());
-        }
+        }        
 
         private void PreOrderTraversal(Node node)
         {
@@ -95,6 +152,11 @@ namespace DataStructures
 
         private void LevelOrderTraversal(Node node)
         {
+            if (node == null)
+            {
+                return;
+            }
+
             Queue<Node> queue = new Queue<Node>();
 
             queue.Enqueue(node);
@@ -121,7 +183,7 @@ namespace DataStructures
         {
             public Node Left { get; set; }
             public Node Right { get; set; }
-            public T Key { get; set; }
+            public T Key { get; private set; }
 
             public Node() : this(default(T), null, null) { }
 

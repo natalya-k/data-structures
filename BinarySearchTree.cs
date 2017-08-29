@@ -81,46 +81,52 @@ namespace DataStructures
             }
         }
 
-        private Node AddTo(Node node, T key)
+        private Node AddTo(Node root, T key)
         {
-            if (node == null)
+            if (root == null)
             {
                 return new Node(key);
             }
 
-            if (key.CompareTo(node.Key) < 0)
-            {
-                node.Left = AddTo(node.Left, key);
-            }
-            else
-            {
-                node.Right = AddTo(node.Right, key);
-            }
+            int compared = root.Key.CompareTo(key);
 
-            return node;
-        }
-
-        private Node RemoveAt(Node node, T key)
-        {
-            //базовый случай
-            if (node == null)
-            {
-                return node;
-            }
-
-            int compared = node.Key.CompareTo(key);
-
+            //root.Key > key
             if (compared > 0)
             {
-                //если искомый ключ меньше корневого ключа, 
-                //то нужный узел находится в левом поддереве
-                node.Left = RemoveAt(node.Left, key);
+                root.Left = AddTo(root.Left, key);
             }
+            //root.Key < key
             else if (compared < 0)
             {
-                //если искомый ключ больше корневого ключа, 
+                root.Right = AddTo(root.Right, key);
+            }
+
+            return root;
+        }
+
+        private Node RemoveAt(Node root, T key)
+        {
+            //базовый случай
+            if (root == null)
+            {
+                return root;
+            }
+
+            int compared = root.Key.CompareTo(key);
+
+            //root.Key > key
+            if (compared > 0)
+            {
+                //если искомый ключ меньше корневого, 
+                //то нужный узел находится в левом поддереве
+                root.Left = RemoveAt(root.Left, key);
+            }
+            //root.Key < key
+            else if (compared < 0)
+            {
+                //если искомый ключ больше корневого, 
                 //то нужный узел находится в правом поддереве
-                node.Right = RemoveAt(node.Right, key);
+                root.Right = RemoveAt(root.Right, key);
             }
             else
             {
@@ -128,30 +134,29 @@ namespace DataStructures
 
                 //узел имеет только одного потомка
 
-                if (node.Left == null)
+                if (root.Left == null)
                 {
-                    return node.Right;
+                    return root.Right;
                 }
-                else if (node.Right == null)
+                else if (root.Right == null)
                 {
-                    return node.Left;
+                    return root.Left;
                 }
 
                 //узел имеет двух потомков
 
                 //в правом поддереве нужно найти узел с наименьшим ключом
 
-                Node minNode = MinNode(node.Right);
+                Node minNode = MinNode(root.Right);
 
                 //найденный узел нужно удалить из прежней позиции
                 //и поставить на место текущего узла
 
-                node.Right = RemoveAt(node.Right, minNode.Key);
-
-                node.Key = minNode.Key;
+                Node right = RemoveAt(root.Right, minNode.Key);
+                root = new Node(minNode.Key, root.Left, right);
             }
 
-            return node;
+            return root;
         }
 
         private Node Search(T key)
@@ -162,10 +167,12 @@ namespace DataStructures
             {
                 int compared = current.Key.CompareTo(key);
 
+                //current.Key > key
                 if (compared > 0)
                 {
                     current = current.Left;
                 }
+                //current.Key < key
                 else if (compared < 0)
                 {
                     current = current.Right;
@@ -179,37 +186,39 @@ namespace DataStructures
             return current;
         }
 
-        private Node SearchAt(Node node, T key)
+        private Node SearchAt(Node root, T key)
         {
-            if (node == null)
+            if (root == null)
             {
-                return node;
+                return root;
             }
 
-            int compared = node.Key.CompareTo(key);
+            int compared = root.Key.CompareTo(key);
 
             if (compared == 0)
             {
-                return node;
+                return root;
             }
+            //root.Key > key
             else if (compared > 0)
             {
-                return SearchAt(node.Left, key);
+                return SearchAt(root.Left, key);
             }
+            //root.Key < key
             else
             {
-                return SearchAt(node.Right, key);
+                return SearchAt(root.Right, key);
             }
         }
 
-        private Node MinNode(Node node)
+        private Node MinNode(Node root)
         {
             if (IsEmpty)
             {
                 throw new Exception("The tree is empty.");
             }
 
-            Node current = node;
+            Node current = root;
 
             while (current.Left != null)
             {
@@ -219,14 +228,14 @@ namespace DataStructures
             return current;
         }
 
-        private Node MaxNode(Node node)
+        private Node MaxNode(Node root)
         {
             if (IsEmpty)
             {
                 throw new Exception("The tree is empty.");
             }
 
-            Node current = node;
+            Node current = root;
 
             while (current.Right != null)
             {
@@ -252,16 +261,18 @@ namespace DataStructures
 
             while (root != null)
             {
-                int compared = node.Key.CompareTo(root.Key);
+                int compared = root.Key.CompareTo(node.Key);
 
+                //root.Key > node.Key
                 if (compared > 0)
-                {
-                    root = root.Right;
-                }
-                else if (compared < 0)
                 {
                     successor = root;
                     root = root.Left;
+                }
+                //root.Key < node.Key
+                else if (compared < 0)
+                {
+                    root = root.Right;
                 }
                 else
                 {
@@ -288,16 +299,18 @@ namespace DataStructures
 
             while (root != null)
             {
-                int compared = node.Key.CompareTo(root.Key);
+                int compared = root.Key.CompareTo(node.Key);
 
+                //root.Key > node.Key
                 if (compared > 0)
+                {
+                    root = root.Left;
+                }
+                //root.Key < node.Key
+                else if (compared < 0)
                 {
                     predecessor = root;
                     root = root.Right;
-                }
-                else if (compared < 0)
-                {
-                    root = root.Left;
                 }
                 else
                 {

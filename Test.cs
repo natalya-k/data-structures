@@ -201,13 +201,17 @@ namespace DataStructures
             tree.InOrderTraversal();
             Console.WriteLine();
 
+            Console.WriteLine("Inorder stack traversal:");
+            tree.InOrderStackTraversal();
+            Console.WriteLine();
+
             Console.WriteLine("Postorder traversal:");
             tree.PostOrderTraversal();
             Console.WriteLine();
 
             Console.WriteLine("Left order traversal:");
             tree.LevelOrderTraversal();
-            Console.WriteLine();
+            Console.WriteLine();            
         }
 
         public static void TestBinarySearchTree()

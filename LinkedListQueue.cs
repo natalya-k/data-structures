@@ -101,7 +101,7 @@ namespace DataStructures
 
         private class Node
         {
-            public T Key { get; set; }
+            public T Key { get; private set; }
             public Node Next { get; set; }
 
             public Node(T key) : this(key, null) { }
