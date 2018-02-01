@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace DataStructures
 {
@@ -39,6 +39,11 @@ namespace DataStructures
 
             Console.WriteLine("Reversed list is");
             list.Reverse();
+            list.Print();
+            Console.WriteLine();
+
+            Console.WriteLine("Recursively reversed list is");
+            list.ReverseRecursively();
             list.Print();
         }
 
@@ -191,7 +196,8 @@ namespace DataStructures
 
         public static void TestBinaryTree()
         {
-            BinaryTree<int> tree = BinaryTree<int>.SampleTree();
+            //BinaryTree<int> tree = BinaryTree<int>.SampleTree();
+            BinaryTree<int> tree = BinaryTree<int>.SampleBSTree();
 
             Console.WriteLine("Preorder traversal:");
             tree.PreOrderTraversal();
@@ -211,7 +217,15 @@ namespace DataStructures
 
             Console.WriteLine("Left order traversal:");
             tree.LevelOrderTraversal();
-            Console.WriteLine();            
+            Console.WriteLine();
+
+            Console.WriteLine();
+            Console.WriteLine("Max width = {0}", tree.MaxWidth());
+            Console.WriteLine("Max height = {0}", tree.MaxHeight());
+
+            Console.WriteLine();
+            Console.WriteLine("Balanced = {0}", tree.IsBalanced());
+            Console.WriteLine("BST = {0}", tree.IsBST());
         }
 
         public static void TestBinarySearchTree()
@@ -261,6 +275,16 @@ namespace DataStructures
             Console.WriteLine("LEVEL ORDER TRAVERSAL");
             tree.LevelOrderTraversal();
             Console.WriteLine();
+        }
+
+        public static void TestDynamicTable()
+        {
+            DynamicTable table = new DynamicTable();
+
+            for (int i = 0; i < 10; i++)
+            {
+                table.Add(i + 1);
+            }
         }
     }
 }
