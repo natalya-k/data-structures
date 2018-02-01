@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -98,6 +98,16 @@ namespace DataStructures
             head = previous;
         }
 
+        public void ReverseRecursively()
+        {
+            ReverseRecursively(head);
+        }
+
+        public void PrintReverse()
+        {
+            PrintReverse(head);
+        }
+
         public void Print()
         {
             foreach (T item in this)
@@ -106,6 +116,33 @@ namespace DataStructures
             }
 
             Console.WriteLine();
+        }
+
+        private void ReverseRecursively(Node current)
+        {
+            if (current == null || current.Next == null)
+            {
+                head = current;
+                return;
+            }
+
+            ReverseRecursively(current.Next);
+
+            Node next = current.Next;
+            current.Next = null;
+            next.Next = current;
+        }
+
+        private void PrintReverse(Node current)
+        {
+            if (current == null)
+            {
+                return;
+            }
+
+            PrintReverse(current.Next);
+
+            Console.Write("{0} ", current.Key);
         }
 
         public IEnumerator<T> GetEnumerator()
