@@ -102,12 +102,7 @@ namespace DataStructures
         {
             ReverseRecursively(head);
         }
-
-        public void PrintReverse()
-        {
-            PrintReverse(head);
-        }
-
+        
         public void Print()
         {
             foreach (T item in this)
@@ -117,6 +112,11 @@ namespace DataStructures
 
             Console.WriteLine();
         }
+
+        public void PrintReverse()
+        {
+            PrintReverse(head);
+        }        
 
         private void ReverseRecursively(Node current)
         {
