@@ -31,6 +31,24 @@ namespace DataStructures
             }
         }
 
+        public BinarySearchTree() { }
+
+        public BinarySearchTree(T rootKey) : base(rootKey) { }
+
+        new public static BinarySearchTree<int> SampleTree()
+        {
+            BinarySearchTree<int> tree = new BinarySearchTree<int>(4);
+            tree.Root.AddLeft(2);
+            tree.Root.AddRight(5);
+            tree.Root.Left.AddLeft(1);
+            tree.Root.Left.AddRight(3);
+            tree.Root.Right.AddRight(6);
+            tree.Root.Right.Right.AddRight(7);
+            tree.Root.Right.Right.Right.AddRight(8);
+
+            return tree;
+        }
+
         public void Add(T key)
         {
             if (Root == null)
@@ -54,7 +72,7 @@ namespace DataStructures
             //return SearchAt(Root, key) != null;
         }
 
-        protected override void PrintNode(Node node)
+        protected void PrintNode(Node node)
         {
             Node predecessor = PredecessorNode(Root, node);
 
