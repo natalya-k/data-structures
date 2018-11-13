@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12,9 +12,7 @@ namespace DataStructures
         public bool IsEmpty { get { return (Count == 0); } }
         public bool IsFull { get { return (Count == items.Length); } }
 
-        public ArrayStack() : this(10) { }
-
-        public ArrayStack(uint capacity)
+        public ArrayStack(uint capacity = 10)
         {
             items = new T[capacity];
         }
