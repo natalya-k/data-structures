@@ -101,8 +101,8 @@ namespace DataStructures
         public void ReverseRecursively()
         {
             ReverseRecursively(head);
-        }
-        
+        }        
+
         public void Print()
         {
             foreach (T item in this)
@@ -116,7 +116,7 @@ namespace DataStructures
         public void PrintReverse()
         {
             PrintReverse(head);
-        }        
+        }
 
         private void ReverseRecursively(Node current)
         {
@@ -166,9 +166,7 @@ namespace DataStructures
             public T Key { get; private set; }
             public Node Next { get; set; }
 
-            public Node(T key) : this(key, null) { }
-
-            public Node(T key, Node next)
+            public Node(T key, Node next = null)
             {
                 Key = key;
                 Next = next;
