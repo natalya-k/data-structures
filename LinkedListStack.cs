@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -86,9 +86,7 @@ namespace DataStructures
             public T Key { get; private set; }
             public Node Next { get; set; }
 
-            public Node(T key) : this (key, null) { }
-
-            public Node(T key, Node next)
+            public Node(T key, Node next = null)
             {
                 Key = key;
                 Next = next;
