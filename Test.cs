@@ -54,7 +54,7 @@ namespace DataStructures
 
             try
             {
-                Console.WriteLine("Try to return the value at the top.");
+                Console.WriteLine("Try to return the value at the top...");
                 stack.Peek();
             }
             catch (InvalidOperationException e)
@@ -73,7 +73,7 @@ namespace DataStructures
 
             try
             {
-                Console.WriteLine("Try to add one more item.");
+                Console.WriteLine("Try to add one more item...");
                 stack.Push(4);
                 Console.WriteLine("Success!");
                 Console.WriteLine();
@@ -96,7 +96,7 @@ namespace DataStructures
 
             try
             {
-                Console.WriteLine("Try to pop last 4 values.");
+                Console.WriteLine("Try to pop last 4 values...");
                 stack.Pop();
                 stack.Pop();
                 stack.Pop();
@@ -113,12 +113,12 @@ namespace DataStructures
         {
             try
             {
-                ArrayQueue<int> queue = new ArrayQueue<int>(4);
-                //LinkedListQueue<int> queue = new LinkedListQueue<int>();
+                //ArrayQueue<int> queue = new ArrayQueue<int>(4);
+                LinkedListQueue<int> queue = new LinkedListQueue<int>();
 
                 try
                 {
-                    Console.WriteLine("Try to return the value at the beggining.");
+                    Console.WriteLine("Try to return the value at the beggining...");
                     queue.Peek();
                 }
                 catch (InvalidOperationException e)
@@ -137,7 +137,7 @@ namespace DataStructures
 
                 try
                 {
-                    Console.WriteLine("Try to add one more item.");
+                    Console.WriteLine("Try to add one more item...");
                     queue.Enqueue(4);
                     Console.WriteLine("Success!");
                     Console.WriteLine();
@@ -175,7 +175,7 @@ namespace DataStructures
 
                 try
                 {
-                    Console.WriteLine("Try to return first 5 values.");
+                    Console.WriteLine("Try to return first 5 values...");
                     queue.Dequeue();
                     queue.Dequeue();
                     queue.Dequeue();
@@ -197,7 +197,7 @@ namespace DataStructures
         public static void TestBinaryTree()
         {
             //BinaryTree<int> tree = BinaryTree<int>.SampleTree();
-            BinaryTree<int> tree = BinaryTree<int>.SampleBSTree();
+            BinarySearchTree<int> tree = BinarySearchTree<int>.SampleTree();
 
             Console.WriteLine("Preorder traversal:");
             tree.PreOrderTraversal();
@@ -234,7 +234,7 @@ namespace DataStructures
 
             try
             {
-                Console.WriteLine("Try to return the minimum value.");
+                Console.WriteLine("Try to return the minimum value...");
                 Console.WriteLine("The minimum value is {0}.", tree.Min);
             }
             catch (InvalidOperationException e)
