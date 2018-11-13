@@ -9,7 +9,7 @@ namespace DataStructures
     {
         public bool IsEmpty { get { return (Root == null); } }
 
-        protected Node Root { get; set; }        
+        protected Node Root { get; set; }
 
         public BinaryTree() { }
 
@@ -27,21 +27,7 @@ namespace DataStructures
             tree.Root.Left.AddRight(5);
 
             return tree;
-        }
-
-        public static BinaryTree<int> SampleBSTree()
-        {
-            BinaryTree<int> tree = new BinaryTree<int>(4);
-            tree.Root.AddLeft(2);
-            tree.Root.AddRight(5);
-            tree.Root.Left.AddLeft(1);
-            tree.Root.Left.AddRight(3);
-            tree.Root.Right.AddRight(6);
-            tree.Root.Right.Right.AddRight(7);
-            tree.Root.Right.Right.Right.AddRight(8);
-
-            return tree;
-        }
+        }        
 
         public void PreOrderTraversal()
         {
@@ -128,12 +114,7 @@ namespace DataStructures
         public bool IsBST()
         {
             return IsBST(Root, null, null);
-        }
-
-        protected virtual void PrintNode(Node node)
-        {
-            Console.Write("{0} ", node.ToString());
-        }        
+        }       
 
         private void PreOrderTraversal(Node node)
         {
@@ -142,7 +123,7 @@ namespace DataStructures
                 return;
             }
 
-            PrintNode(node);
+            node.Print();
 
             PreOrderTraversal(node.Left);
 
@@ -158,7 +139,7 @@ namespace DataStructures
 
             InOrderTraversal(node.Left);
 
-            PrintNode(node);            
+            node.Print();
 
             InOrderTraversal(node.Right);
         }
@@ -174,7 +155,7 @@ namespace DataStructures
 
             PostOrderTraversal(node.Right);
 
-            PrintNode(node);
+            node.Print();
         }
 
         private void LevelOrderTraversal(Node node)
@@ -192,7 +173,7 @@ namespace DataStructures
             {
                 Node current = queue.Dequeue();
 
-                PrintNode(current);
+                current.Print();
 
                 if (current.Left != null)
                 {
@@ -331,11 +312,7 @@ namespace DataStructures
             public Node Right { get; set; }
             public T Key { get; private set; }
 
-            public Node() : this(default(T), null, null) { }
-
-            public Node(T key) : this(key, null, null) { }
-
-            public Node(T key, Node left, Node right)
+            public Node(T key = default(T), Node left = null, Node right = null)
             {
                 Key = key;
                 Left = left;
@@ -350,6 +327,11 @@ namespace DataStructures
             public void AddRight(T key)
             {
                 Right = new Node(key);
+            }
+
+            public void Print()
+            {
+                Console.Write("{0} ", this.ToString());
             }
 
             public override string ToString()
